@@ -22,7 +22,7 @@ These files are provided to facilitate understanding and use of GitHub Gist API 
 
 ## Download Links
 
-You can download the corresponding OpenAPI documents from the links below:
+You can download the corresponding OpenAPI documents from the links below, or view the Gist containing both documents here: [GitHub Gist](https://gist.github.com/TakashiSasaki/494513122fc5627f6e1a78732b64d4a6):
 
 1. [github\_gist\_api.yaml](https://gist.githubusercontent.com/TakashiSasaki/494513122fc5627f6e1a78732b64d4a6/raw/045ab1efa87a2e6ba91ed202fd46d8ddc44483c2/github_gist_api.yaml)
 2. [github\_gist\_api\_subset.yaml](https://gist.githubusercontent.com/TakashiSasaki/494513122fc5627f6e1a78732b64d4a6/raw/045ab1efa87a2e6ba91ed202fd46d8ddc44483c2/github_gist_api_subset.yaml)
