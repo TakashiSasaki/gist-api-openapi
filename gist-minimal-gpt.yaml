@@ -30,15 +30,13 @@ paths:
             type: string
             format: date-time
         - name: per_page
-          description: The number of results per page (max 100). For more information, see "[Using pagination in the REST
-            API](https://docs.github.com/enterprise-server@3.9/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+          description: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/enterprise-server@3.9/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
           in: query
           schema:
             type: integer
             default: 30
         - name: page
-          description: The page number of the results to fetch. For more information, see "[Using pagination in the REST
-            API](https://docs.github.com/enterprise-server@3.9/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+          description: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/enterprise-server@3.9/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
           in: query
           schema:
             type: integer
@@ -57,8 +55,9 @@ paths:
               $ref: "#/components/headers/link"
     post:
       summary: Create a gist
-      description: Allows you to add a new gist with one or more files. **Note:** Don't name your files "gistfile" with a
-        numerical suffix. This is the format of the automatic naming scheme that Gist uses internally.
+      description: >-
+        Allows you to add a new gist with one or more files.
+        **Note:** Don't name your files "gistfile" with a numerical suffix. This is the format of the automatic naming scheme that Gist uses internally.
       operationId: gistsCreate
       parameters: []
       requestBody:
@@ -73,14 +72,17 @@ paths:
                 files:
                   description: Names and content for the files that make up the gist. The keys represent the filenames.
                   type: object
-                  additionalProperties:
-                    type: object
-                    properties:
-                      content:
-                        description: Content of the file
-                        type: string
-                    required:
+                  properties:
+                    newtext:
+                      type: object
+                      properties:
+                        content:
+                          description: Content of the file
+                          type: string
+                      required:
                       - content
+                  required:
+                  - newtext
                 public:
                   oneOf:
                     - description: Flag indicating whether the gist is public
@@ -92,7 +94,7 @@ paths:
                         - "true"
                         - "false"
               required:
-                - files
+              - files
               type: object
             examples:
               default:
@@ -333,6 +335,93 @@ components:
           $ref: "#/components/schemas/simple-user"
         truncated:
           type: boolean
+    base-gist:
+      title: Base Gist
+      description: Base Gist
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+        forks_url:
+          type: string
+          format: uri
+        commits_url:
+          type: string
+          format: uri
+        id:
+          type: string
+        node_id:
+          type: string
+        git_pull_url:
+          type: string
+          format: uri
+        git_push_url:
+          type: string
+          format: uri
+        html_url:
+          type: string
+          format: uri
+        files:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              filename:
+                type: string
+              type:
+                type: string
+              language:
+                type: string
+              raw_url:
+                type: string
+              size:
+                type: integer
+        public:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        description:
+          type: string
+          nullable: true
+        comments:
+          type: integer
+        user:
+          $ref: "#/components/schemas/nullable-simple-user"
+        comments_url:
+          type: string
+          format: uri
+        owner:
+          $ref: "#/components/schemas/simple-user"
+        truncated:
+          type: boolean
+        forks:
+          type: array
+          items: {}
+        history:
+          type: array
+          items: {}
+      required:
+        - id
+        - node_id
+        - url
+        - forks_url
+        - commits_url
+        - git_pull_url
+        - git_push_url
+        - html_url
+        - comments_url
+        - public
+        - description
+        - comments
+        - user
+        - files
+        - created_at
+        - updated_at
     simple-user:
       value:
         login: octocat
@@ -650,3 +739,68 @@ components:
         - created_at
         - updated_at
       additionalProperties: false
+    validation-error:
+      title: Validation Error
+      description: Validation Error
+      type: object
+      required:
+        - message
+        - documentation_url
+      properties:
+        message:
+          type: string
+        documentation_url:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            required:
+              - code
+            properties:
+              resource:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
+              code:
+                type: string
+              index:
+                type: integer
+              value:
+                oneOf:
+                  - type: string
+                    nullable: true
+                  - type: integer
+                    nullable: true
+                  - type: array
+                    nullable: true
+                    items:
+                      type: string
+    basic-error:
+      title: Basic Error
+      description: Basic Error
+      type: object
+      properties:
+        message:
+          type: string
+        documentation_url:
+          type: string
+        url:
+          type: string
+        status:
+          type: string
+  responses:
+    validation_failed:
+      description: Validation failed, or the endpoint has been spammed.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/validation-error"
+    requires_authentication:
+      description: Requires authentication
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/basic-error"
