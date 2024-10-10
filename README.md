@@ -37,6 +37,6 @@ The `github_gist_api_subset.yaml` document is also used in the ChatGPT custom GP
 
 You can import these files into Swagger Editor or Postman to view the API details and generate API clients.
 
-Contact
+## Contact
 
 The author of this Gist is Takashi Sasaki. You can contact him via X (formerly Twitter) for any inquiries or further information.
