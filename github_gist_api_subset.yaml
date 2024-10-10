@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   version: 1.0.0
-  title: GitHub Gist API Subset
+  title: GitHub Gist API
   description: >
     This OpenAPI document contains only the endpoints necessary for manipulating gists using GitHub's REST API. 
     While the GitHub REST API includes many other endpoints, this document focuses on a subset related to gists.
