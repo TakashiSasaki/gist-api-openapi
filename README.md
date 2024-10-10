@@ -36,3 +36,7 @@ These two OpenAPI documents have been validated using the tool available at [Swa
 The `github_gist_api_subset.yaml` document is also used in the ChatGPT custom GPT named ["Gist Writer"](https://chatgpt.com/g/g-EJnDg5v36-gist-writer), which allows for streamlined interaction with Gist endpoints.
 
 You can import these files into Swagger Editor or Postman to view the API details and generate API clients.
+
+Contact
+
+The author of this Gist is Takashi Sasaki. You can contact him via X (formerly Twitter) for any inquiries or further information.
