@@ -3,9 +3,10 @@ info:
   version: 1.0.0
   title: GitHub Gist API
   description: >
-    This OpenAPI document contains only the endpoints necessary for manipulating gists using GitHub's REST API. 
-    While the GitHub REST API includes many other endpoints, this document focuses on a subset related to gists.
-    Additionally, to make it compatible with ChatGPT's GPTs custom actions, some examples and parts of descriptions have been removed for compactness.
+    This OpenAPI document contains only the endpoints necessary for manipulating gists using GitHub's REST API.  While
+    the GitHub REST API includes many other endpoints, this document focuses on a subset related to gists. Additionally,
+    to make it compatible with ChatGPT's GPTs custom actions, some examples and parts of descriptions have been removed
+    for compactness.
   license:
     name: MIT
     url: https://spdx.org/licenses/MIT
@@ -17,7 +18,7 @@ info:
   x-origin:
     - url: https://github.com/github/rest-api-description/blob/main/descriptions/ghec/ghec.2022-11-28.yaml
       format: OpenAPI
-      version: '3.0'
+      version: "3.0"
       summary:
         version: 1.1.4
         title: GitHub v3 REST API
@@ -48,13 +49,15 @@ paths:
             type: string
             format: date-time
         - name: per_page
-          description: The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/enterprise-server@3.9/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+          description: The number of results per page (max 100). For more information, see "[Using pagination in the REST
+            API](https://docs.github.com/enterprise-server@3.9/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
           in: query
           schema:
             type: integer
             default: 30
         - name: page
-          description: The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/enterprise-server@3.9/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+          description: The page number of the results to fetch. For more information, see "[Using pagination in the REST
+            API](https://docs.github.com/enterprise-server@3.9/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
           in: query
           schema:
             type: integer
@@ -73,9 +76,8 @@ paths:
               $ref: "#/components/headers/link"
     post:
       summary: Create a gist
-      description: >-
-        Allows you to add a new gist with one or more files.
-        **Note:** Don't name your files "gistfile" with a numerical suffix. This is the format of the automatic naming scheme that Gist uses internally.
+      description: Allows you to add a new gist with one or more files. **Note:** Don't name your files "gistfile" with a
+        numerical suffix. This is the format of the automatic naming scheme that Gist uses internally.
       operationId: gistsCreate
       parameters: []
       requestBody:
@@ -98,9 +100,9 @@ paths:
                           description: Content of the file
                           type: string
                       required:
-                      - content
+                        - content
                   required:
-                  - newtext
+                    - newtext
                 public:
                   oneOf:
                     - description: Flag indicating whether the gist is public
@@ -112,7 +114,7 @@ paths:
                         - "true"
                         - "false"
               required:
-              - files
+                - files
               type: object
             examples:
               default:
@@ -136,6 +138,90 @@ paths:
                 type: string
         "422":
           $ref: "#/components/responses/validation_failed"
+  /gists/{gist_id}:
+    get:
+      summary: Get a gist
+      description: Gets a specified gist. This endpoint supports the following custom media types. -
+        **`application/vnd.github.raw+json`** - **`application/vnd.github.base64+json`**
+      operationId: gistsGet
+      parameters:
+        - name: gist_id
+          description: The unique identifier of the gist.
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gist-simple"
+    patch:
+      summary: Update a gist
+      description: Allows you to update a gist's description and to update, delete, or rename gist files.  At least one of
+        `description` or `files` is required. This endpoint supports the following custom media types.  -
+        **`application/vnd.github.raw+json`** - **`application/vnd.github.base64+json`**
+      operationId: gistsUpdate
+      parameters:
+        - name: gist_id
+          description: The unique identifier of the gist.
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                description:
+                  description: The description of the gist.
+                  type: string
+                files:
+                  description: "The gist files to be updated, renamed, or deleted. Each `key` must match the current filename (including
+                    extension) of the targeted gist file. For example: `hello.py`. To delete a file, set the whole file
+                    to null. For example: `hello.py : null`. The file will also be deleted if the specified object does
+                    not contain at least one of `content` or `filename`."
+                  type: object
+                  properties:
+                    _existing_file_:
+                      type: object
+                      nullable: true
+                      properties:
+                        content:
+                          description: The new content of the file.
+                          type: string
+                        filename:
+                          description: The new filename for the file.
+                          type: string
+                          nullable: true
+              type: object
+              nullable: true
+      responses:
+        "200":
+          description: Response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gist-simple"
+        "422":
+          $ref: "#/components/responses/validation_failed"
+    delete:
+      summary: Delete a gist
+      operationId: gistsDelete
+      parameters:
+        - name: gist_id
+          description: The unique identifier of the gist.
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Response
 components:
   parameters:
     since:
