@@ -302,26 +302,6 @@
             "$ref": "#/components/responses/validation_failed"
           }
         }
-      },
-      "delete": {
-        "summary": "Delete a gist",
-        "operationId": "gistsDelete",
-        "parameters": [
-          {
-            "name": "gist_id",
-            "description": "The unique identifier of the gist.",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Response"
-          }
-        }
       }
     }
   },
