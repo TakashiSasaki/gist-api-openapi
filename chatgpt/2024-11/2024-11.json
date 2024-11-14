@@ -36,13 +36,32 @@
                 },
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/since"
+                        "name": "since",
+                        "description": "Only show results that were last updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
                     },
                     {
-                        "$ref": "#/components/parameters/per-page"
+                        "name": "per_page",
+                        "description": "The number of results per page (max 100). For more information, see \"[Using pagination in the REST API](https://docs.github.com/enterprise-cloud@latest//rest/using-the-rest-api/using-pagination-in-the-rest-api).\"",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 30
+                        }
                     },
                     {
-                        "$ref": "#/components/parameters/page"
+                        "name": "page",
+                        "description": "The page number of the results to fetch. For more information, see \"[Using pagination in the REST API](https://docs.github.com/enterprise-cloud@latest//rest/using-the-rest-api/using-pagination-in-the-rest-api).\"",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
                     }
                 ],
                 "responses": {
@@ -233,7 +252,13 @@
                 },
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/gist-id"
+                        "name": "gist_id",
+                        "description": "The unique identifier of the gist.",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -262,8 +287,8 @@
             },
             "get": {
                 "summary": "Get a gist",
-"description": "Gets a gist. Supports `application/vnd.github.raw+json` for raw markdown (default) and `application/vnd.github.base64+json` for base64 (for invalid UTF-8). See '[Media types](https://docs.github.com/enterprise-cloud@latest/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)'."
-,                "tags": [
+                "description": "Gets a gist. Supports `application/vnd.github.raw+json` for raw markdown (default) and `application/vnd.github.base64+json` for base64 (for invalid UTF-8). See '[Media types](https://docs.github.com/enterprise-cloud@latest/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)'.",
+                "tags": [
                     "gists"
                 ],
                 "operationId": "gistsGet",
@@ -273,7 +298,13 @@
                 },
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/gist-id"
+                        "name": "gist_id",
+                        "description": "The unique identifier of the gist.",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -314,8 +345,8 @@
             },
             "patch": {
                 "summary": "Update a gist",
-"description": "Update a gist's description, and update, delete, or rename files. Unchanged files remain. Requires `description` or `files`. Supports `application/vnd.github.raw+json` (raw markdown, default) and `application/vnd.github.base64+json` (base64 for invalid UTF-8)."
-,                "tags": [
+                "description": "Update a gist's description, and update, delete, or rename files. Unchanged files remain. Requires `description` or `files`. Supports `application/vnd.github.raw+json` (raw markdown, default) and `application/vnd.github.base64+json` (base64 for invalid UTF-8).",
+                "tags": [
                     "gists"
                 ],
                 "operationId": "gistsUpdate",
@@ -325,7 +356,13 @@
                 },
                 "parameters": [
                     {
-                        "$ref": "#/components/parameters/gist-id"
+                        "name": "gist_id",
+                        "description": "The unique identifier of the gist.",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "requestBody": {
@@ -1513,43 +1550,6 @@
             }
         },
         "parameters": {
-            "since": {
-                "name": "since",
-                "description": "Only show results that were last updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.",
-                "in": "query",
-                "required": false,
-                "schema": {
-                    "type": "string",
-                    "format": "date-time"
-                }
-            },
-            "per-page": {
-                "name": "per_page",
-                "description": "The number of results per page (max 100). For more information, see \"[Using pagination in the REST API](https://docs.github.com/enterprise-cloud@latest//rest/using-the-rest-api/using-pagination-in-the-rest-api).\"",
-                "in": "query",
-                "schema": {
-                    "type": "integer",
-                    "default": 30
-                }
-            },
-            "page": {
-                "name": "page",
-                "description": "The page number of the results to fetch. For more information, see \"[Using pagination in the REST API](https://docs.github.com/enterprise-cloud@latest//rest/using-the-rest-api/using-pagination-in-the-rest-api).\"",
-                "in": "query",
-                "schema": {
-                    "type": "integer",
-                    "default": 1
-                }
-            },
-            "gist-id": {
-                "name": "gist_id",
-                "description": "The unique identifier of the gist.",
-                "in": "path",
-                "required": true,
-                "schema": {
-                    "type": "string"
-                }
-            },
             "comment-id": {
                 "name": "comment_id",
                 "description": "The unique identifier of the comment.",
