@@ -1,0 +1,70 @@
+{
+    "/gists/{gist_id}/forks": {
+        "post": {
+            "summary": "Fork a gist",
+            "description": "Creates a fork of a specified gist.",
+            "tags": [
+                "gists"
+            ],
+            "operationId": "gists/fork",
+            "externalDocs": {
+                "description": "API method documentation",
+                "url": "https://docs.github.com/enterprise-cloud@latest//rest/gists/gists#fork-a-gist"
+            },
+            "parameters": [
+                {
+                    "$ref": "#/components/parameters/gist-id"
+                }
+            ],
+            "responses": {
+                "201": {
+                    "description": "Successful response containing the forked gist.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/base-gist"
+                            },
+                            "examples": {
+                                "default": {
+                                    "$ref": "#/components/examples/base-gist"
+                                }
+                            }
+                        }
+                    },
+                    "headers": {
+                        "Location": {
+                            "description": "The URL of the newly created forked gist.",
+                            "schema": {
+                                "type": "string",
+                                "format": "uri"
+                            },
+                            "example": "https://api.github.com/gists/aa5a315d61ae9438b18d"
+                        }
+                    }
+                },
+                "404": {
+                    "description": "Not found. The specified gist could not be found.",
+                    "$ref": "#/components/responses/not_found"
+                },
+                "422": {
+                    "description": "Validation failed. The input provided was not valid.",
+                    "$ref": "#/components/responses/validation_failed"
+                },
+                "304": {
+                    "description": "Not modified. The resource has not changed since the last request.",
+                    "$ref": "#/components/responses/not_modified"
+                },
+                "403": {
+                    "description": "Forbidden. The request is understood, but it has been refused or access is not allowed.",
+                    "$ref": "#/components/responses/forbidden"
+                }
+            },
+            "x-github": {
+                "githubCloudOnly": false,
+                "enabledForGitHubApps": false,
+                "category": "gists",
+                "subcategory": "gists"
+            }
+        }
+    }
+}

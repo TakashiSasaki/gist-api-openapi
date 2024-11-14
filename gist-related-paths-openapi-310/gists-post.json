@@ -1,0 +1,139 @@
+{
+    "/gists": {
+        "post": {
+            "summary": "Create a gist",
+            "description": "Allows you to add a new gist with one or more files.\n\n> [!NOTE]\n> Don't name your files \"gistfile\" with a numerical suffix. This is the format of the automatic naming scheme that Gist uses internally.",
+            "operationId": "gists/create",
+            "tags": [
+                "gists"
+            ],
+            "externalDocs": {
+                "description": "API method documentation",
+                "url": "https://docs.github.com/enterprise-cloud@latest//rest/gists/gists#create-a-gist"
+            },
+            "parameters": [],
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "description": {
+                                    "description": "Description of the gist",
+                                    "example": "Example Ruby script",
+                                    "type": "string"
+                                },
+                                "files": {
+                                    "description": "Names and content for the files that make up the gist",
+                                    "example": {
+                                        "hello.rb": {
+                                            "content": "puts \"Hello, World!\""
+                                        }
+                                    },
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "object",
+                                        "properties": {
+                                            "content": {
+                                                "description": "Content of the file",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "content"
+                                        ]
+                                    }
+                                },
+                                "public": {
+                                    "description": "Flag indicating whether the gist is public",
+                                    "oneOf": [
+                                        {
+                                            "type": "boolean",
+                                            "example": true,
+                                            "default": false
+                                        },
+                                        {
+                                            "type": "string",
+                                            "example": "true",
+                                            "enum": [
+                                                "true",
+                                                "false"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "files"
+                            ]
+                        },
+                        "examples": {
+                            "default": {
+                                "summary": "Creating a gist",
+                                "value": {
+                                    "description": "Example of a gist",
+                                    "public": false,
+                                    "files": {
+                                        "README.md": {
+                                            "content": "Hello World"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "Successful response containing the created gist.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/gist-simple"
+                            },
+                            "examples": {
+                                "default": {
+                                    "$ref": "#/components/examples/gist"
+                                }
+                            }
+                        }
+                    },
+                    "headers": {
+                        "Location": {
+                            "description": "The URL of the newly created gist.",
+                            "schema": {
+                                "type": "string",
+                                "format": "uri"
+                            },
+                            "example": "https://api.github.com/gists/aa5a315d61ae9438b18d"
+                        }
+                    }
+                },
+                "422": {
+                    "description": "Validation failed. The input provided was not valid.",
+                    "$ref": "#/components/responses/validation_failed"
+                },
+                "304": {
+                    "description": "Not modified. The resource has not changed since the last request.",
+                    "$ref": "#/components/responses/not_modified"
+                },
+                "404": {
+                    "description": "Not found. The specified resource could not be found.",
+                    "$ref": "#/components/responses/not_found"
+                },
+                "403": {
+                    "description": "Forbidden. The request is understood, but it has been refused or access is not allowed.",
+                    "$ref": "#/components/responses/forbidden"
+                }
+            },
+            "x-github": {
+                "githubCloudOnly": false,
+                "enabledForGitHubApps": false,
+                "category": "gists",
+                "subcategory": "gists"
+            }
+        }
+    }
+}

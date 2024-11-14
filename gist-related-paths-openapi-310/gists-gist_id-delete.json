@@ -1,0 +1,44 @@
+{
+    "/gists/{gist_id}": {
+        "delete": {
+            "summary": "Delete a gist",
+            "description": "Deletes a specified gist, identified by its ID.",
+            "tags": [
+                "gists"
+            ],
+            "operationId": "gists/delete",
+            "externalDocs": {
+                "description": "API method documentation",
+                "url": "https://docs.github.com/enterprise-cloud@latest//rest/gists/gists#delete-a-gist"
+            },
+            "parameters": [
+                {
+                    "$ref": "#/components/parameters/gist-id"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "No content. The gist was successfully deleted and there is no additional content to send."
+                },
+                "404": {
+                    "description": "Not found. The specified gist could not be found.",
+                    "$ref": "#/components/responses/not_found"
+                },
+                "304": {
+                    "description": "Not modified. The resource has not changed since the last request.",
+                    "$ref": "#/components/responses/not_modified"
+                },
+                "403": {
+                    "description": "Forbidden. The request is understood, but it has been refused or access is not allowed.",
+                    "$ref": "#/components/responses/forbidden"
+                }
+            },
+            "x-github": {
+                "githubCloudOnly": false,
+                "enabledForGitHubApps": false,
+                "category": "gists",
+                "subcategory": "gists"
+            }
+        }
+    }
+}

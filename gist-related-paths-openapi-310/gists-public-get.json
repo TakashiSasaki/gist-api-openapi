@@ -1,0 +1,71 @@
+{
+    "/gists/public": {
+        "get": {
+            "summary": "List public gists",
+            "description": "List public gists sorted by most recently updated to least recently updated.\n\nNote: With [pagination](https://docs.github.com/enterprise-cloud@latest//rest/guides/using-pagination-in-the-rest-api), you can fetch up to 3000 gists. For example, you can fetch 100 pages with 30 gists per page or 30 pages with 100 gists per page.",
+            "tags": [
+                "gists"
+            ],
+            "operationId": "gists/list-public",
+            "externalDocs": {
+                "description": "API method documentation",
+                "url": "https://docs.github.com/enterprise-cloud@latest//rest/gists/gists#list-public-gists"
+            },
+            "parameters": [
+                {
+                    "$ref": "#/components/parameters/since"
+                },
+                {
+                    "$ref": "#/components/parameters/per-page"
+                },
+                {
+                    "$ref": "#/components/parameters/page"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Successful response containing the list of public gists.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/base-gist"
+                                }
+                            },
+                            "examples": {
+                                "default": {
+                                    "$ref": "#/components/examples/base-gist-items"
+                                }
+                            }
+                        }
+                    },
+                    "headers": {
+                        "Link": {
+                            "description": "Pagination links for navigating through the list of gists.",
+                            "$ref": "#/components/headers/link"
+                        }
+                    }
+                },
+                "422": {
+                    "description": "Validation failed. The input provided was not valid.",
+                    "$ref": "#/components/responses/validation_failed"
+                },
+                "304": {
+                    "description": "Not modified. The resource has not changed since the last request.",
+                    "$ref": "#/components/responses/not_modified"
+                },
+                "403": {
+                    "description": "Forbidden. The request is understood, but it has been refused or access is not allowed.",
+                    "$ref": "#/components/responses/forbidden"
+                }
+            },
+            "x-github": {
+                "githubCloudOnly": false,
+                "enabledForGitHubApps": false,
+                "category": "gists",
+                "subcategory": "gists"
+            }
+        }
+    }
+}

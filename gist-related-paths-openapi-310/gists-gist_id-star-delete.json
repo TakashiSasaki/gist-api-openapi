@@ -1,0 +1,44 @@
+{
+    "/gists/{gist_id}/star": {
+        "delete": {
+            "summary": "Unstar a gist",
+            "description": "Removes the star from a specified gist.",
+            "tags": [
+                "gists"
+            ],
+            "operationId": "gists/unstar",
+            "externalDocs": {
+                "description": "API method documentation",
+                "url": "https://docs.github.com/enterprise-cloud@latest//rest/gists/gists#unstar-a-gist"
+            },
+            "parameters": [
+                {
+                    "$ref": "#/components/parameters/gist-id"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "No content. The gist was successfully unstarred."
+                },
+                "304": {
+                    "description": "Not modified. The gist was already not starred.",
+                    "$ref": "#/components/responses/not_modified"
+                },
+                "404": {
+                    "description": "Not found. The specified gist could not be found.",
+                    "$ref": "#/components/responses/not_found"
+                },
+                "403": {
+                    "description": "Forbidden. The request is understood, but it has been refused or access is not allowed.",
+                    "$ref": "#/components/responses/forbidden"
+                }
+            },
+            "x-github": {
+                "githubCloudOnly": false,
+                "enabledForGitHubApps": false,
+                "category": "gists",
+                "subcategory": "gists"
+            }
+        }
+    }
+}

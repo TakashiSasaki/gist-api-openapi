@@ -1,0 +1,56 @@
+{
+    "/gists/{gist_id}": {
+        "get": {
+            "summary": "Get a gist",
+            "description": "Gets a specified gist.\n\nThis endpoint supports the following custom media types. For more information, see \"[Media types](https://docs.github.com/enterprise-cloud@latest//rest/using-the-rest-api/getting-started-with-the-rest-api#media-types).\"\n\n- **`application/vnd.github.raw+json`**: Returns the raw markdown. This is the default if you do not pass any specific media type.\n- **`application/vnd.github.base64+json`**: Returns the base64-encoded contents. This can be useful if your gist contains any invalid UTF-8 sequences.",
+            "tags": [
+                "gists"
+            ],
+            "operationId": "gists/get",
+            "externalDocs": {
+                "description": "API method documentation",
+                "url": "https://docs.github.com/enterprise-cloud@latest//rest/gists/gists#get-a-gist"
+            },
+            "parameters": [
+                {
+                    "$ref": "#/components/parameters/gist-id"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Successful response containing the requested gist details.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/gist-simple"
+                            },
+                            "examples": {
+                                "default": {
+                                    "$ref": "#/components/examples/gist"
+                                }
+                            }
+                        }
+                    }
+                },
+                "403": {
+                    "description": "Forbidden. The request is understood, but it has been refused or access is not allowed.",
+                    "$ref": "#/components/responses/forbidden_gist"
+                },
+                "404": {
+                    "description": "Not found. The specified gist could not be found.",
+                    "$ref": "#/components/responses/not_found"
+                },
+                "304": {
+                    "description": "Not modified. The resource has not changed since the last request.",
+                    "$ref": "#/components/responses/not_modified"
+                }
+            },
+            "x-github": {
+                "githubCloudOnly": false,
+                "enabledForGitHubApps": false,
+                "category": "gists",
+                "subcategory": "gists"
+            }
+        }
+    }
+}

@@ -1,0 +1,44 @@
+{
+    "/gists/{gist_id}/star": {
+        "put": {
+            "summary": "Star a gist",
+            "description": "Adds a star to a specified gist. Note that you'll need to set `Content-Length` to zero when calling this endpoint. For more information, see \"[HTTP method](https://docs.github.com/enterprise-cloud@latest//rest/guides/getting-started-with-the-rest-api#http-method).\"",
+            "tags": [
+                "gists"
+            ],
+            "operationId": "gists/star",
+            "externalDocs": {
+                "description": "API method documentation",
+                "url": "https://docs.github.com/enterprise-cloud@latest//rest/gists/gists#star-a-gist"
+            },
+            "parameters": [
+                {
+                    "$ref": "#/components/parameters/gist-id"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "No content. The gist was successfully starred."
+                },
+                "404": {
+                    "description": "Not found. The specified gist could not be found.",
+                    "$ref": "#/components/responses/not_found"
+                },
+                "304": {
+                    "description": "Not modified. The resource has not changed since the last request.",
+                    "$ref": "#/components/responses/not_modified"
+                },
+                "403": {
+                    "description": "Forbidden. The request is understood, but it has been refused or access is not allowed.",
+                    "$ref": "#/components/responses/forbidden"
+                }
+            },
+            "x-github": {
+                "githubCloudOnly": false,
+                "enabledForGitHubApps": false,
+                "category": "gists",
+                "subcategory": "gists"
+            }
+        }
+    }
+}

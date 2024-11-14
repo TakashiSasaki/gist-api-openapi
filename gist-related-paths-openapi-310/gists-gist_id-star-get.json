@@ -1,0 +1,52 @@
+{
+    "/gists/{gist_id}/star": {
+        "get": {
+            "summary": "Check if a gist is starred",
+            "description": "Checks if a gist is starred by the authenticated user.",
+            "tags": [
+                "gists"
+            ],
+            "operationId": "gists/check-is-starred",
+            "externalDocs": {
+                "description": "API method documentation",
+                "url": "https://docs.github.com/enterprise-cloud@latest//rest/gists/gists#check-if-a-gist-is-starred"
+            },
+            "parameters": [
+                {
+                    "$ref": "#/components/parameters/gist-id"
+                }
+            ],
+            "responses": {
+                "204": {
+                    "description": "No content. The gist is starred by the authenticated user."
+                },
+                "404": {
+                    "description": "Not found. The specified gist is not starred by the authenticated user.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {},
+                                "additionalProperties": false
+                            }
+                        }
+                    }
+                },
+                "304": {
+                    "description": "Not modified. The resource has not changed since the last request.",
+                    "$ref": "#/components/responses/not_modified"
+                },
+                "403": {
+                    "description": "Forbidden. The request is understood, but it has been refused or access is not allowed.",
+                    "$ref": "#/components/responses/forbidden"
+                }
+            },
+            "x-github": {
+                "githubCloudOnly": false,
+                "enabledForGitHubApps": false,
+                "category": "gists",
+                "subcategory": "gists"
+            }
+        }
+    }
+}
