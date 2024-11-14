@@ -9,7 +9,6 @@ info:
   license:
     name: MIT
     url: https://spdx.org/licenses/MIT
-  github_gist_api.yaml
   termsOfService: https://docs.github.com/articles/github-terms-of-service
   contact:
     name: Support

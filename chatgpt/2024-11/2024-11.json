@@ -29,7 +29,7 @@
                 "tags": [
                     "gists"
                 ],
-                "operationId": "gists/list",
+                "operationId": "gistsList",
                 "externalDocs": {
                     "description": "API method documentation",
                     "url": "https://docs.github.com/enterprise-cloud@latest//rest/gists/gists#list-gists-for-the-authenticated-user"
@@ -86,7 +86,7 @@
             "post": {
                 "summary": "Create a gist",
                 "description": "Allows you to add a new gist with one or more files.\n\n> [!NOTE]\n> Don't name your files \"gistfile\" with a numerical suffix. This is the format of the automatic naming scheme that Gist uses internally.",
-                "operationId": "gists/create",
+                "operationId": "gistsCreate",
                 "tags": [
                     "gists"
                 ],
@@ -226,7 +226,7 @@
                 "tags": [
                     "gists"
                 ],
-                "operationId": "gists/delete",
+                "operationId": "gistsDelete",
                 "externalDocs": {
                     "description": "API method documentation",
                     "url": "https://docs.github.com/enterprise-cloud@latest//rest/gists/gists#delete-a-gist"
@@ -266,7 +266,7 @@
                 "tags": [
                     "gists"
                 ],
-                "operationId": "gists/get",
+                "operationId": "gistsGet",
                 "externalDocs": {
                     "description": "API method documentation",
                     "url": "https://docs.github.com/enterprise-cloud@latest//rest/gists/gists#get-a-gist"
@@ -318,7 +318,7 @@
                 "tags": [
                     "gists"
                 ],
-                "operationId": "gists/update",
+                "operationId": "gistsUpdate",
                 "externalDocs": {
                     "description": "API method documentation",
                     "url": "https://docs.github.com/enterprise-cloud@latest//rest/gists/gists#update-a-gist"
