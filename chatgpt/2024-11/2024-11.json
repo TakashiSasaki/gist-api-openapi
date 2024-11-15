@@ -182,6 +182,20 @@
                                             "required": [
                                                 "content"
                                             ]
+                                        },
+                                        "properties": {
+                                            "_new_file_name_": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "content": {
+                                                        "description": "Content of the file",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "content"
+                                                ]
+                                            }
                                         }
                                     },
                                     "public": {
@@ -448,6 +462,27 @@
                                                         "string",
                                                         "null"
                                                     ]
+                                                }
+                                            }
+                                        },
+                                        "properties": {
+                                            "_existing_file_name_": {
+                                                "type": [
+                                                    "object",
+                                                    "null"
+                                                ],
+                                                "properties": {
+                                                    "content": {
+                                                        "description": "The new content of the file.",
+                                                        "type": "string"
+                                                    },
+                                                    "filename": {
+                                                        "description": "The new filename for the file.",
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ]
+                                                    }
                                                 }
                                             }
                                         }
@@ -2269,6 +2304,34 @@
                     "truncated": false
                 }
             }
+        },
+        "securitySchemes": {
+            "OAuth2": {
+                "type": "oauth2",
+                "flows": {
+                    "authorizationCode": {
+                        "authorizationUrl": "https://github.com/login/oauth/authorize",
+                        "tokenUrl": "https://github.com/login/oauth/access_token",
+                        "scopes": {
+                            "repo": "Full control of private repositories",
+                            "user": "Read and write access to profile information",
+                            "gist": "Write and manage gists"
+                        }
+                    }
+                }
+            }
+        },
+        "security": [
+            {
+                "OAuth2": [
+                    "repo",
+                    "user",
+                    "gist"
+                ]
+            }
+        ],
+        "x-refreshTokenUsage": {
+            "description": "To refresh the access token, make a POST request to https://github.com/login/oauth/access_token with the following parameters:\n- client_id: The client ID of your GitHub App.\n- client_secret: The client secret of your GitHub App. Required unless the token was generated using the device flow.\n- grant_type: Must be 'refresh_token'.\n- refresh_token: The refresh token you received with the initial user access token.\n\nThe response will include a new access_token and refresh_token, as well as expires_in and refresh_token_expires_in indicating their respective expiration times."
         }
     }
 }
